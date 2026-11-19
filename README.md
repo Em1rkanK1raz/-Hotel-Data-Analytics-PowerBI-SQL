@@ -116,12 +116,3 @@ python python/data_preparation.py
 2. Sunucu: `localhost` | Veritabanı: `OtelAnalizDB`
 3. `vw_RezervasyonDetay` ve `vw_AylikKPIOzeti` view'larını seç
 4. `sql/05_dax_measures.txt` içindeki DAX ölçülerini ekle
-
----
-
-## 👤 Hakkımda
-
-**Em1rkanK1raz** — Teknik Veri Analisti adayı  
-SQL · Power BI · Python · Veri Modelleme
-
-> 📫 GitHub: [github.com/Em1rkanK1raz](https://github.com/Em1rkanK1raz)
