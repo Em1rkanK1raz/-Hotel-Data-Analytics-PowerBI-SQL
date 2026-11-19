@@ -1,0 +1,68 @@
+-- ============================================================
+-- GÜN 3: Power BI DAX Ölçüleri Referansı
+-- Dosya: 05_dax_measures.sql (DAX syntax - Power BI'a kopyala)
+-- ============================================================
+-- NOT: Bu dosyayı Power BI Desktop'ta "Yeni Ölçü" kısmına
+--      yapıştırarak kullan. SQL sözdizimi değil, DAX'tır!
+-- ============================================================
+
+-- ============================================================
+-- TEMEL KPI ÖLÇÜLERİ
+-- ============================================================
+
+-- Toplam Ciro
+Toplam Ciro = 
+CALCULATE(
+    SUM(vw_RezervasyonDetay[ToplamTutar]),
+    vw_RezervasyonDetay[RezervasyonDurumu] = "Tamamlandı"
+)
+
+-- Toplam Rezervasyon Sayısı
+Toplam Rezervasyon = 
+CALCULATE(
+    COUNTROWS(vw_RezervasyonDetay),
+    vw_RezervasyonDetay[RezervasyonDurumu] = "Tamamlandı"
+)
+
+-- Ortalama Konaklama Süresi (Gün)
+Ortalama Konaklama Suresi = 
+CALCULATE(
+    AVERAGE(vw_RezervasyonDetay[KonaklamaSuresiGun]),
+    vw_RezervasyonDetay[RezervasyonDurumu] = "Tamamlandı"
+)
+
+-- Rezervasyon Başına Ortalama Gelir
+Ortalama Rezervasyon Tutari = 
+DIVIDE([Toplam Ciro], [Toplam Rezervasyon], 0)
+
+-- İptal Oranı (%)
+Iptal Orani = 
+VAR ToplamRezervasyonHepsi = COUNTROWS(vw_RezervasyonDetay)
+VAR IptalSayisi = CALCULATE(COUNTROWS(vw_RezervasyonDetay), vw_RezervasyonDetay[RezervasyonDurumu] = "İptal")
+RETURN
+DIVIDE(IptalSayisi, ToplamRezervasyonHepsi, 0)
+
+-- Yabancı Müşteri Oranı (%)
+Yabanci Musteri Orani = 
+VAR ToplamMusteri = CALCULATE(COUNTROWS(vw_RezervasyonDetay), vw_RezervasyonDetay[RezervasyonDurumu] = "Tamamlandı")
+VAR YabanciMusteri = CALCULATE(COUNTROWS(vw_RezervasyonDetay), vw_RezervasyonDetay[MusteriTipi] = "Yabancı", vw_RezervasyonDetay[RezervasyonDurumu] = "Tamamlandı")
+RETURN
+DIVIDE(YabanciMusteri, ToplamMusteri, 0)
+
+-- Önceki Yıl Ciro (Yıl Üstü Yıl Karşılaştırma)
+Onceki Yil Ciro = 
+CALCULATE(
+    [Toplam Ciro],
+    DATEADD(vw_RezervasyonDetay[GirisTarihi], -1, YEAR)
+)
+
+-- Ciro Büyüme Oranı (YoY %)
+Ciro Buyume Orani = 
+DIVIDE([Toplam Ciro] - [Onceki Yil Ciro], [Onceki Yil Ciro], 0)
+
+-- ============================================================
+-- RENK KODİ (Conditional Formatting için)
+-- Dashboard'da büyüme yeşil, düşüş kırmızı göstermek için
+-- ============================================================
+Buyume Rengi = 
+IF([Ciro Buyume Orani] >= 0, "Green", "Red")
