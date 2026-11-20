@@ -1,0 +1,21 @@
+﻿OdaID;OdaNumarasi;OdaTipi;KatSayisi;KisiKapasitesi;GunlukFiyat;Manzara;Durum
+1;101;Standart;1;2;1200.00;Bahçe;Müsait
+2;102;Standart;1;2;1200.00;Bahçe;Müsait
+3;103;Standart;1;3;1400.00;Havuz;Müsait
+4;201;Deluxe;2;2;2200.00;Deniz;Müsait
+5;202;Deluxe;2;2;2200.00;Deniz;Müsait
+6;203;Deluxe;2;3;2500.00;Havuz;Müsait
+7;204;Deluxe;2;4;2800.00;Deniz;Müsait
+8;301;Suite;3;2;4500.00;Deniz;Müsait
+9;302;Suite;3;3;5000.00;Deniz;Müsait
+10;303;Suite;3;4;5500.00;Panoramik;Müsait
+11;401;Penthouse;4;4;8000.00;Panoramik;Müsait
+12;V01;Villa;1;6;12000.00;Deniz;Müsait
+13;V02;Villa;1;8;15000.00;Özel Havuz;Müsait
+14;104;Standart;1;2;1100.00;Bahçe;Müsait
+15;205;Deluxe;2;2;2300.00;Havuz;Müsait
+16;304;Suite;3;2;4800.00;Deniz;Müsait
+17;105;Standart;1;1;950.00;Bahçe;Müsait
+18;206;Deluxe;2;3;2600.00;Deniz;Müsait
+19;305;Suite;3;4;5200.00;Panoramik;Müsait
+20;402;Penthouse;4;6;9500.00;Panoramik;Müsait
